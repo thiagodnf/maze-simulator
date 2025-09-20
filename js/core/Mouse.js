@@ -1,10 +1,13 @@
+import Direction from "../constants/Direction.js";
+import { M_FORWARD, T_RIGHT, T_LEFT, T_UP, T_DOWN } from "../constants/Move.js";
+
 export default class Mouse {
 
     constructor(maze, strategy) {
         this.i = 1;
         this.j = 1;
         this.speed = 100;
-        this.lookup = "down";
+        this.lookup = Direction.DOWN;
         this.maze = maze;
         this.strategy = strategy;
     }
@@ -47,16 +50,16 @@ export default class Mouse {
 
     moveForward() {
 
-        if (this.lookup === "right") {
+        if (this.lookup === Direction.RIGHT) {
             this.moveRight();
         }
-        if (this.lookup === "left") {
+        if (this.lookup === Direction.LEFT) {
             this.moveLeft();
         }
-        if (this.lookup === "up") {
+        if (this.lookup === Direction.UP) {
             this.moveUp();
         }
-        if (this.lookup === "down") {
+        if (this.lookup === Direction.DOWN) {
             this.moveDown();
         }
     }
@@ -65,16 +68,81 @@ export default class Mouse {
 
         const next = this.strategy.next(this, maze);
 
-        if (next === "MF") {
+        if (next === M_FORWARD) {
             this.moveForward()
-        } else if (next === "RU") {
-            this.lookup = "up"
-        } else if (next === "RD") {
-            this.lookup = "down"
-        } else if (next === "RL") {
-            this.lookup = "left"
-        } else if (next === "RR") {
-            this.lookup = "right"
+        } else if (next === T_UP) {
+            this.lookup = Direction.UP;
+        } else if (next === T_DOWN) {
+            this.lookup = Direction.DOWN;
+        } else if (next === T_LEFT) {
+            this.lookup = Direction.LEFT;
+        } else if (next === T_RIGHT) {
+            this.lookup = Direction.RIGHT;
         }
+    }
+
+    hasLeftWall() {
+
+        // const dirMap = {
+        //     DOWN: [0, 1],
+        //     UP: [0, -1],
+        //     RIGHT: [-1, 0],
+        //     LEFT: [1, 0]
+        // };
+
+        // const [di, dj] = dirMap[this.lookup] || [0, 0];
+
+        // console.log(this.lookup.toString());
+
+        // return this.maze.hasWall(this.i + di, this.j + dj);
+
+        if (this.lookup == Direction.DOWN) {
+            if (this.maze.hasWall(this.i, this.j + 1)) {
+                return true;
+            }
+        }
+        if (this.lookup == Direction.UP) {
+            if (this.maze.hasWall(this.i, this.j - 1)) {
+                return true;
+            }
+        }
+        if (this.lookup == Direction.RIGHT) {
+            if (this.maze.hasWall(this.i - 1, this.j)) {
+                return true;
+            }
+        }
+        if (this.lookup == Direction.LEFT) {
+            if (this.maze.hasWall(this.i + 1, this.j)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    hasRightWall() {
+
+        if (this.lookup == Direction.DOWN) {
+            if (this.maze.hasWall(this.i, this.j - 1)) {
+                return true;
+            }
+        }
+        if (this.lookup == Direction.UP) {
+            if (this.maze.hasWall(this.i, this.j + 1)) {
+                return true;
+            }
+        }
+        if (this.lookup == Direction.RIGHT) {
+            if (this.maze.hasWall(this.i + 1, this.j)) {
+                return true;
+            }
+        }
+        if (this.lookup == Direction.LEFT) {
+            if (this.maze.hasWall(this.i - 1, this.j)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

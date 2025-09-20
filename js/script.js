@@ -1,5 +1,6 @@
 import CanvasUtils from "./utils/CanvasUtils.js";
 import Random from "./strategies/Random.js";
+import FollowWall from "./strategies/FollowWall.js";
 import Maze from "./core/Maze.js";
 import Mouse from "./core/Mouse.js";
 
@@ -23,13 +24,6 @@ speeds.forEach(radio => {
 const mouseImage = new Image(SIZE, SIZE);
 const wallImage = new Image(SIZE, SIZE);
 
-const rotation = {
-    "down": 0,
-    "right": 90,
-    "up": 180,
-    "left": 270,
-}
-
 btnStartStop.addEventListener('click', function () {
 
     running = !running;
@@ -46,6 +40,7 @@ btnStartStop.addEventListener('click', function () {
 const maze = new Maze();
 
 maze.addMouse(new Mouse(maze, new Random()));
+maze.addMouse(new Mouse(maze, new FollowWall()));
 
 function drawMaze(maze) {
 
@@ -69,7 +64,7 @@ function drawMaze(maze) {
 
 function drawMouse(mouse) {
 
-    let degrees = rotation[mouse.lookup];
+    let degrees = mouse.lookup.angle;
 
     let angle = -1.0 * degrees * Math.PI / 180;
 
