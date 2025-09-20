@@ -6,7 +6,8 @@ export default class Mouse {
     constructor(maze, strategy) {
         this.i = 1;
         this.j = 1;
-        this.lookup = Direction.DOWN;
+        this.lookup = Direction.UP;
+        this.lookupAngle = 90;
         this.maze = maze;
         this.strategy = strategy;
     }
@@ -126,6 +127,28 @@ export default class Mouse {
             this.lookup = Direction.LEFT;
         } else if (next === MOVE.TURN_RIGHT) {
             this.lookup = Direction.RIGHT;
+        } else if (next === MOVE.TURN_LEFT_2) {
+
+            if (this.lookup == Direction.DOWN) {
+                this.lookup = Direction.RIGHT;
+            } else if (this.lookup == Direction.RIGHT) {
+                this.lookup = Direction.UP;
+            } else if (this.lookup == Direction.UP) {
+                this.lookup = Direction.LEFT;
+            } else if (this.lookup == Direction.LEFT) {
+                this.lookup = Direction.DOWN;
+            }
+        } else if (next === MOVE.TURN_RIGHT_2) {
+
+            if (this.lookup == Direction.DOWN) {
+                this.lookup = Direction.LEFT;
+            } else if (this.lookup == Direction.LEFT) {
+                this.lookup = Direction.UP;
+            } else if (this.lookup == Direction.UP) {
+                this.lookup = Direction.RIGHT;
+            } else if (this.lookup == Direction.RIGHT) {
+                this.lookup = Direction.DOWN;
+            }
         }
     }
 }

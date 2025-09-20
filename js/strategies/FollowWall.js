@@ -13,16 +13,20 @@ export default class FollowWall {
             return this.pending.shift();
         }
 
-        if (mouse.hasWallInTheLeft()) {
-            if (mouse.hasWallInTheFront()) {
-                if (mouse.hasWallInTheRight()) {
-                    return Move.TURN_UP;
-                }
-            } else {
-                return Move.MOVE_FORWARD;
-            }
+        const front = mouse.hasWallInTheFront();
+        const left = mouse.hasWallInTheLeft();
+        const right = mouse.hasWallInTheRight();
+
+        if (!left) {
+            this.pending = [Move.TURN_LEFT_2, Move.MOVE_FORWARD];
+        } else if (!front) {
+            this.pending = [Move.MOVE_FORWARD];
+        } else if (!right) {
+            this.pending = [Move.TURN_RIGHT_2, Move.MOVE_FORWARD];
         } else {
-            this.pending = [Move.TURN_RIGHT, Move.MOVE_FORWARD];
+            // Turn Back
+            this.pending = [Move.TURN_LEFT_2, Move.TURN_LEFT_2];
         }
+
     }
 }

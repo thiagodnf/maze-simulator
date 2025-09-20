@@ -4,7 +4,7 @@ import FollowWall from "./strategies/FollowWall.js";
 import Maze from "./core/Maze.js";
 import Mouse from "./core/Mouse.js";
 
-const SIZE = 40;
+const SIZE = 20;
 
 const btnStartStop = document.getElementById("btn-start-stop");
 const speeds = document.querySelectorAll("input[name=speed]");
@@ -39,7 +39,7 @@ btnStartStop.addEventListener('click', function () {
 
 const maze = new Maze();
 
-// maze.addMouse(new Mouse(maze, new Random()));
+maze.addMouse(new Mouse(maze, new Random()));
 maze.addMouse(new Mouse(maze, new FollowWall()));
 
 function drawMaze(maze) {
