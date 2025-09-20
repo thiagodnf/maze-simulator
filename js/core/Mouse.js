@@ -1,5 +1,5 @@
 import Direction from "../constants/Direction.js";
-import { M_FORWARD, T_RIGHT, T_LEFT, T_UP, T_DOWN } from "../constants/Move.js";
+import MOVE from "../constants/Move.js";
 
 export default class Mouse {
 
@@ -14,6 +14,51 @@ export default class Mouse {
     hasWall(i, j) {
         return this.maze.hasWall(i, j);
     }
+
+    hasWallInTheBack() {
+
+        switch (this.lookup) {
+            case Direction.DOWN: return this.hasWall(this.i - 1, this.j);
+            case Direction.UP: return this.hasWall(this.i + 1, this.j);
+            case Direction.LEFT: return this.hasWall(this.i, this.j + 1);
+            case Direction.RIGHT: return this.hasWall(this.i, this.j - 1);
+            default: return false;
+        }
+    }
+
+    hasWallInTheFront() {
+
+        switch (this.lookup) {
+            case Direction.DOWN: return this.hasWall(this.i + 1, this.j);
+            case Direction.UP: return this.hasWall(this.i - 1, this.j);
+            case Direction.LEFT: return this.hasWall(this.i, this.j - 1);
+            case Direction.RIGHT: return this.hasWall(this.i, this.j + 1);
+            default: return false;
+        }
+    }
+
+    hasWallInTheLeft() {
+
+        switch (this.lookup) {
+            case Direction.DOWN: return this.hasWall(this.i, this.j + 1);
+            case Direction.UP: return this.hasWall(this.i, this.j - 1);
+            case Direction.LEFT: return this.hasWall(this.i + 1, this.j);
+            case Direction.RIGHT: return this.hasWall(this.i - 1, this.j);
+            default: return false;
+        }
+    }
+
+    hasWallInTheRight() {
+
+        switch (this.lookup) {
+            case Direction.DOWN: return this.hasWall(this.i, this.j - 1);
+            case Direction.UP: return this.hasWall(this.i, this.j + 1);
+            case Direction.LEFT: return this.hasWall(this.i - 1, this.j);
+            case Direction.RIGHT: return this.hasWall(this.i + 1, this.j);
+            default: return false;
+        }
+    }
+
 
     moveUp() {
 
@@ -71,98 +116,16 @@ export default class Mouse {
 
         const next = this.strategy.next(this, maze);
 
-        if (next === M_FORWARD) {
+        if (next === MOVE.MOVE_FORWARD) {
             this.moveForward()
-        } else if (next === T_UP) {
+        } else if (next === MOVE.TURN_UP) {
             this.lookup = Direction.UP;
-        } else if (next === T_DOWN) {
+        } else if (next === MOVE.TURN_DOWN) {
             this.lookup = Direction.DOWN;
-        } else if (next === T_LEFT) {
+        } else if (next === MOVE.TURN_LEFT) {
             this.lookup = Direction.LEFT;
-        } else if (next === T_RIGHT) {
+        } else if (next === MOVE.TURN_RIGHT) {
             this.lookup = Direction.RIGHT;
         }
-    }
-
-    hasLeftWall() {
-
-        // const dirMap = {
-        //     DOWN: [0, 1],
-        //     UP: [0, -1],
-        //     RIGHT: [-1, 0],
-        //     LEFT: [1, 0]
-        // };
-
-        // const [di, dj] = dirMap[this.lookup] || [0, 0];
-
-        // console.log(this.lookup.toString());
-
-        // return this.maze.hasWall(this.i + di, this.j + dj);
-
-        if (this.lookup == Direction.DOWN) {
-            if (this.maze.hasWall(this.i, this.j + 1)) {
-                return true;
-            }
-        }
-        if (this.lookup == Direction.UP) {
-            if (this.maze.hasWall(this.i, this.j - 1)) {
-                return true;
-            }
-        }
-        if (this.lookup == Direction.RIGHT) {
-            if (this.maze.hasWall(this.i - 1, this.j)) {
-                return true;
-            }
-        }
-        if (this.lookup == Direction.LEFT) {
-            if (this.maze.hasWall(this.i + 1, this.j)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    hasDownWall2() {
-        return this.hasWall(this.i + 1, this.j);
-    }
-
-    hasUpWall2() {
-        return this.hasWall(this.i - 1, this.j);
-    }
-
-    hasRightWall2() {
-        return this.hasWall(this.i, this.j + 1);
-    }
-
-    hasLeftWall2() {
-        return this.hasWall(this.i, this.j - 1);
-    }
-
-    hasRightWall() {
-
-        if (this.lookup == Direction.DOWN) {
-            if (this.maze.hasWall(this.i, this.j - 1)) {
-                return true;
-            }
-        }
-        if (this.lookup == Direction.UP) {
-            if (this.maze.hasWall(this.i, this.j + 1)) {
-                return true;
-            }
-        }
-        if (this.lookup == Direction.RIGHT) {
-            if (this.maze.hasWall(this.i + 1, this.j)) {
-                return true;
-            }
-        }
-        if (this.lookup == Direction.LEFT) {
-            if (this.maze.hasWall(this.i - 1, this.j)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
