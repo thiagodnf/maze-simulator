@@ -9,18 +9,36 @@ export default class FollowWall {
 
     next(mouse, maze) {
 
-        // console.log(Direction.DOWN == Direction.LEFT)
         if (this.pending.length !== 0) {
             return this.pending.shift();
         }
 
+        console.log(mouse.hasRightWall2())
         let posPos = [];
 
-        if (mouse.hasLeftWall(mouse, maze)) {
-            return M_FORWARD;
+        if (mouse.hasRightWall2()) {
+            // if (!mouse.hasUpWall2()) {
+            //     this.pending = [T_UP, M_FORWARD];
+            // } else {
+                this.pending.push(M_FORWARD);
+            // }
+
         } else {
-            this.pending.push(M_FORWARD);
-            return T_RIGHT;
+            this.pending = [T_RIGHT, M_FORWARD];
         }
+
+        // if (mouse.hasRightWall2()) {
+
+        // }
+
+        // console.log(posPos)
+        // if (mouse.hasRightWall2)
+
+        // else {
+        //     this.pending.push(M_FORWARD);
+        //     return T_RIGHT;
+        // }
+
+        // return pending.shift()
     }
 }

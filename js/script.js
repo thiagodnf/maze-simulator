@@ -39,7 +39,7 @@ btnStartStop.addEventListener('click', function () {
 
 const maze = new Maze();
 
-maze.addMouse(new Mouse(maze, new Random()));
+// maze.addMouse(new Mouse(maze, new Random()));
 maze.addMouse(new Mouse(maze, new FollowWall()));
 
 function drawMaze(maze) {

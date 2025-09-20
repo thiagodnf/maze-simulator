@@ -6,15 +6,18 @@ export default class Mouse {
     constructor(maze, strategy) {
         this.i = 1;
         this.j = 1;
-        this.speed = 100;
         this.lookup = Direction.DOWN;
         this.maze = maze;
         this.strategy = strategy;
     }
 
+    hasWall(i, j) {
+        return this.maze.hasWall(i, j);
+    }
+
     moveUp() {
 
-        if (this.maze.hasWall(this.i - 1, this.j)) {
+        if (this.hasWall(this.i - 1, this.j)) {
             return;
         }
 
@@ -23,7 +26,7 @@ export default class Mouse {
 
     moveDown() {
 
-        if (this.maze.hasWall(this.i + 1, this.j)) {
+        if (this.hasWall(this.i + 1, this.j)) {
             return;
         }
 
@@ -32,7 +35,7 @@ export default class Mouse {
 
     moveLeft() {
 
-        if (this.maze.hasWall(this.i, this.j - 1)) {
+        if (this.hasWall(this.i, this.j - 1)) {
             return;
         }
 
@@ -41,7 +44,7 @@ export default class Mouse {
 
     moveRight() {
 
-        if (this.maze.hasWall(this.i, this.j + 1)) {
+        if (this.hasWall(this.i, this.j + 1)) {
             return;
         }
 
@@ -118,6 +121,23 @@ export default class Mouse {
         }
 
         return false;
+    }
+
+
+    hasDownWall2() {
+        return this.hasWall(this.i + 1, this.j);
+    }
+
+    hasUpWall2() {
+        return this.hasWall(this.i - 1, this.j);
+    }
+
+    hasRightWall2() {
+        return this.hasWall(this.i, this.j + 1);
+    }
+
+    hasLeftWall2() {
+        return this.hasWall(this.i, this.j - 1);
     }
 
     hasRightWall() {
