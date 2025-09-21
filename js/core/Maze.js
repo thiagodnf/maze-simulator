@@ -26,12 +26,13 @@ export default class Maze {
             [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
         ];
 
-        this.pattern = this.generateMaze(25,45);
+        this.pattern = this.generateMaze(15,45);
 
         // console.table(this.generateMaze(15,15))
     }
 
     generateMaze(rows, cols) {
+
         if (rows < 3) rows = 3;
         if (cols < 3) cols = 3;
         if (rows % 2 === 0) rows++;

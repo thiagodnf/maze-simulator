@@ -10,6 +10,7 @@ export default class Mouse {
         this.lookupAngle = 90;
         this.maze = maze;
         this.strategy = strategy;
+        this.moves = 0;
     }
 
     hasWall(i, j) {
@@ -150,5 +151,7 @@ export default class Mouse {
                 this.lookup = Direction.DOWN;
             }
         }
+
+        this.moves++;
     }
 }

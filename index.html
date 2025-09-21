@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-100">
 
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,8 @@
     <link href="css/style.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="d-flex flex-column h-100">
+
     <nav class="navbar navbar-expand-sm fixed-top" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Maze Simulator</a>
@@ -29,62 +30,86 @@
         </div>
     </nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-9">
-                <canvas width="900px" height="600px" id="canvas"></canvas>
-            </div>
-            <div class="col-md-3">
-                <div class="card">
-                    <div class="card-header">
-                        <nav>
-                            <div class="nav nav-tabs card-header-tabs">
-                                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#info-tab" type="button" data-i18n="info">Info</button>
-                                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#settings-tab" type="button" data-i18n="settings">Settings</button>
-                            </div>
-                        </nav>
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="mb-3">
+                        <div class="btn-group me-3">
+                            <button class="btn btn-primary" id="btn-add-mouse"><i class="bi bi-plus-circle me-3"></i>Add Mouse</button>
+                        </div>
+                        <div class="btn-group me-3">
+                            <button class="btn btn-primary" id="btn-start-stop"><i class="bi bi-play-circle me-3"></i>Start</button>
+                        </div>
+                        <div class="btn-group">
+
+                            <input type="radio" class="btn-check" name="speed" id="speed-1" autocomplete="off" value="1000">
+                            <label class="btn btn-outline-primary" for="speed-1">1</label>
+
+                            <input type="radio" class="btn-check" name="speed" id="speed-2" autocomplete="off" value="500">
+                            <label class="btn btn-outline-primary" for="speed-2">2</label>
+
+                            <input type="radio" class="btn-check" name="speed" id="speed-3" autocomplete="off" value="100" checked>
+                            <label class="btn btn-outline-primary" for="speed-3">3</label>
+
+                            <input type="radio" class="btn-check" name="speed" id="speed-4" autocomplete="off" value="50">
+                            <label class="btn btn-outline-primary" for="speed-4">4</label>
+
+                            <input type="radio" class="btn-check" name="speed" id="speed-5" autocomplete="off" value="1">
+                            <label class="btn btn-outline-primary" for="speed-5">5</label>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="info-tab" role="tabpanel">
-
-                                <div class="d-grid mb-3">
-                                    <label for="btn-start-stop" class="form-label">Controls</label>
-                                    <div class="btn-group ">
-                                        <button class="btn btn-primary" id="btn-start-stop"><i class="bi bi-play-circle me-3"></i>Start</button>
-                                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-9">
+                    <canvas width="900px" height="300px" id="canvas"></canvas>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+                        <div class="card-header">
+                            <nav>
+                                <div class="nav nav-tabs card-header-tabs">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#info-tab" type="button" data-i18n="info">Mice</button>
+                                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#settings-tab" type="button" data-i18n="settings">Settings</button>
                                 </div>
-                                <div class="d-grid mb-3">
-                                    <label for="speed-3" class="form-label">Speed</label>
-                                    <div class="btn-group">
+                            </nav>
+                        </div>
+                        <div class="card-body">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active px-0" id="info-tab" role="tabpanel">
 
-                                        <input type="radio" class="btn-check" name="speed" id="speed-1" autocomplete="off" value="1000">
-                                        <label class="btn btn-outline-primary" for="speed-1">1</label>
-
-                                        <input type="radio" class="btn-check" name="speed" id="speed-2" autocomplete="off" value="500">
-                                        <label class="btn btn-outline-primary" for="speed-2">2</label>
-
-                                        <input type="radio" class="btn-check" name="speed" id="speed-3" autocomplete="off" value="100" checked>
-                                        <label class="btn btn-outline-primary" for="speed-3">3</label>
-
-                                        <input type="radio" class="btn-check" name="speed" id="speed-4" autocomplete="off" value="50">
-                                        <label class="btn btn-outline-primary" for="speed-4">4</label>
-
-                                        <input type="radio" class="btn-check" name="speed" id="speed-5" autocomplete="off" value="1">
-                                        <label class="btn btn-outline-primary" for="speed-5">5</label>
-                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                                            <div class="me-auto">
+                                                Subheading
+                                            </div>
+                                            <span class="badge text-bg-primary rounded-pill">0</span>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="settings-tab" role="tabpanel">
+                                <div class="tab-pane fade" id="settings-tab" role="tabpanel">
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <img id="ant-image" class="d-none" src="img/ant.png" />
+    </main>
 
+    <footer class="footer mt-auto py-2 bg-light">
+        <div class="container-fluid small text-muted">
+            <div class="row">
+                <div class="col me-auto">
+                    <span>Made with <i class="bi bi-heart"></i> in JS</span>
+                </div>
+                <div class="col-auto"></div>
+            </div>
+        </div>
+    </footer>
     <!-- Vendors -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
