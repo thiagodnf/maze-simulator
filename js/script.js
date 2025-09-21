@@ -3,17 +3,21 @@ import Random from "./strategies/Random.js";
 import FollowWall from "./strategies/FollowWall.js";
 import Maze from "./core/Maze.js";
 import Mouse from "./core/Mouse.js";
+import MazeUtils from "./utils/MazeUtils.js";
 
 const SIZE = 20;
 
 const btnStartStop = document.getElementById("btn-start-stop");
 const speeds = document.querySelectorAll("input[name=speed]");
+const modalNewMaze = document.getElementById("modal-new-maze");
+const formNewMaze = document.getElementById("form-new-maze");
 const canvas = document.getElementById("canvas");
 const context = canvas.getContext("2d");
 
 let running = false;
 let speed = 100;
 let last = 0;
+let maze = new Maze(MazeUtils.pattern1());
 
 speeds.forEach(radio => {
     radio.addEventListener('change', function () {
@@ -37,7 +41,32 @@ btnStartStop.addEventListener('click', function () {
     }
 });
 
-const maze = new Maze();
+function resizeWindow() {
+
+    const rect = canvas.getBoundingClientRect();
+
+    const offsetTop = rect.top + window.scrollY;
+    const offsetLeft = rect.left + window.scrollX;
+
+    canvas.width = window.innerWidth - 2 * offsetLeft;
+    canvas.height = window.innerHeight - offsetTop - 50;
+}
+
+formNewMaze.addEventListener('submit', function (e) {
+
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    const rows = parseInt(formData.get('rows'), 10);
+    const cols = parseInt(formData.get('columns'), 10);
+
+    maze = new Maze(MazeUtils.generate(rows, cols));
+    maze.addMouse(new Mouse(maze, new Random()));
+    maze.addMouse(new Mouse(maze, new FollowWall()));
+
+    bootstrap.Modal.getInstance(modalNewMaze).hide();
+});
 
 maze.addMouse(new Mouse(maze, new Random()));
 maze.addMouse(new Mouse(maze, new FollowWall()));
@@ -117,3 +146,6 @@ wallImage.onload = animate;
 mouseImage.src = "images/mouse.png";
 wallImage.src = "images/wall-3.png";
 
+window.addEventListener('resize', resizeWindow);
+
+resizeWindow();

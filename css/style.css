@@ -1,5 +1,5 @@
 body {
-    padding-top: 70px;
+    padding-top: 56px;
 }
 
 canvas {
@@ -7,6 +7,6 @@ canvas {
     border: 1px solid rgba(0,0,0,.125);
 }
 
-.navbar {
+.navbar, .modal-header{
     background-color: #10505b;
 }
