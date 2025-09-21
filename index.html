@@ -97,12 +97,12 @@
                     <div class="modal-body row">
                         <div class="col mb-3">
                             <label for="rows" class="form-label">Rows</label>
-                            <input type="number" class="form-control" id="rows" name="rows" min="10" max="300" step="1" value="10" autofocus required>
+                            <input type="number" class="form-control" id="rows" name="rows" min="10" max="300" step="1" value="10" pattern="[0-9]*" autocomplete="off" autocorrect="off" autofocus required>
                             <div class="form-text">Must between 10 and 300</div>
                         </div>
                         <div class="col mb-3">
                             <label for="columns" class="form-label">Columns</label>
-                            <input type="number" class="form-control" id="columns" name="columns" min="10" max="300" step="1" value="10" required>
+                            <input type="number" class="form-control" id="columns" name="columns" min="10" max="300" step="1" value="10" pattern="[0-9]*" autocomplete="off" autocorrect="off" required>
                             <div class="form-text">Must between 10 and 300</div>
                         </div>
                     </div>
