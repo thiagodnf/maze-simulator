@@ -4,6 +4,9 @@ const SIZE = 20;
 
 export default class CanvasUtils {
 
+    static mouseImage = document.getElementById("mouse-image");
+    static wallImage = document.getElementById("wall-image");
+
     static init(canvas) {
         CanvasZoom.init(canvas);
     }
@@ -25,21 +28,26 @@ export default class CanvasUtils {
         }
     }
 
-    static drawMaze(context, maze) {
+    static drawImage(ctx, image, x, y, width, height) {
+        ctx.drawImage(image, x, y, width, height);
+    }
 
-        for (let i = 0; i < maze.length; i++) {
+    static drawMaze(ctx, maze) {
 
-            for (let j = 0; j < maze[i].length; j++) {
+        let matrix = maze.pattern;
 
-                if (maze[i][j] === 0) {
-                    CanvasUtils.drawSquare(context, j * SIZE, i * SIZE, SIZE, "")
-                } else if (maze[i][j] === 1) {
-                    CanvasUtils.drawSquare(context, j * SIZE, i * SIZE, SIZE, "lightgray");
-                    // context.drawImage(wallImage, j * SIZE, i * SIZE, SIZE, SIZE);
-                } else if (maze[i][j] === 2) {
-                    CanvasUtils.drawSquare(context, j * SIZE, i * SIZE, SIZE, "blue")
-                } else if (maze[i][j] === 3) {
-                    CanvasUtils.drawSquare(context, j * SIZE, i * SIZE, SIZE, "green")
+        for (let i = 0; i < matrix.length; i++) {
+
+            for (let j = 0; j < matrix[i].length; j++) {
+
+                if (matrix[i][j] === 0) {
+
+                } else if (matrix[i][j] === 1) {
+                    CanvasUtils.drawImage(ctx, CanvasUtils.wallImage, j * SIZE, i * SIZE, SIZE, SIZE);
+                } else if (matrix[i][j] === 2) {
+                    CanvasUtils.drawSquare(ctx, j * SIZE, i * SIZE, SIZE, "blue")
+                } else if (matrix[i][j] === 3) {
+                    CanvasUtils.drawSquare(ctx, j * SIZE, i * SIZE, SIZE, "green")
                 }
             }
         }
@@ -55,9 +63,9 @@ export default class CanvasUtils {
         const y = mouse.i * SIZE + SIZE / 2;
 
         context.save();
-        context.translate(CanvasZoom.toScreenX(x), CanvasZoom.toScreenX(y));
+        context.translate(x, y);
         context.rotate(angle);
-        // context.drawImage(mouseImage, -SIZE / 2, -SIZE / 2, SIZE, SIZE);
+        context.drawImage(CanvasUtils.mouseImage, -SIZE / 2, -SIZE / 2, SIZE, SIZE);
         context.restore();
     }
 }

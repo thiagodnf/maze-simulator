@@ -25,9 +25,6 @@ speeds.forEach(radio => {
     });
 });
 
-const mouseImage = new Image(SIZE, SIZE);
-const wallImage = new Image(SIZE, SIZE);
-
 btnStartStop.addEventListener('click', function () {
 
     running = !running;
@@ -71,50 +68,14 @@ formNewMaze.addEventListener('submit', function (e) {
 maze.addMouse(new Mouse(maze, new Random()));
 maze.addMouse(new Mouse(maze, new FollowWall()));
 
-function drawMaze(maze) {
-
-    for (let i = 0; i < maze.length; i++) {
-
-        for (let j = 0; j < maze[i].length; j++) {
-
-            if (maze[i][j] === 0) {
-                // CanvasUtils.drawSquare(context, j * SIZE, i * SIZE, SIZE, "")
-            } else if (maze[i][j] === 1) {
-                // CanvasUtils.drawSquare(context, j * SIZE, i * SIZE, SIZE, "lightgray");
-                context.drawImage(wallImage, j * SIZE, i * SIZE, SIZE, SIZE);
-            } else if (maze[i][j] === 2) {
-                CanvasUtils.drawSquare(context, j * SIZE, i * SIZE, SIZE, "blue")
-            } else if (maze[i][j] === 3) {
-                CanvasUtils.drawSquare(context, j * SIZE, i * SIZE, SIZE, "green")
-            }
-        }
-    }
-}
-
-function drawMouse(mouse) {
-
-    let degrees = mouse.lookup.angle;
-
-    let angle = -1.0 * degrees * Math.PI / 180;
-
-    const x = mouse.j * SIZE + SIZE / 2;
-    const y = mouse.i * SIZE + SIZE / 2;
-
-    context.save();
-    context.translate(x, y);
-    context.rotate(angle);
-    context.drawImage(mouseImage, -SIZE / 2, -SIZE / 2, SIZE, SIZE);
-    context.restore();
-}
-
 function drawCanvas() {
 
-    context.clearRect(0, 0, canvas.width, canvas.height);
+    CanvasUtils.clear(context);
 
-    drawMaze(maze.pattern)
+    CanvasUtils.drawMaze(context, maze)
 
     for (const mouse of maze.mice) {
-        drawMouse(mouse);
+        CanvasUtils.drawMouse(context, mouse);
     }
 }
 
@@ -139,13 +100,11 @@ function animate(ts) {
 
 animate();
 
-mouseImage.onload = animate;
-wallImage.onload = animate;
-
-// Load an image of intrinsic size 300x227 in CSS pixels
-mouseImage.src = "images/mouse.png";
-wallImage.src = "images/wall-3.png";
-
 window.addEventListener('resize', resizeWindow);
 
 resizeWindow();
+
+// disable right clicking
+canvas.addEventListener('contextmenu', e => e.preventDefault())
+
+// CanvasUtils.init(canvas);
