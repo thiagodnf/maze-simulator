@@ -37,7 +37,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="navbarDropdown" data-bs-toggle="dropdown">File</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-new-maze"><i class="bi bi-upload me-3"></i><span>New Maze</span></a></li>
+                            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#modal-new-maze"><i class="bi bi-plus me-3"></i><span>New Maze</span></a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -89,17 +89,6 @@
         </div>
     </main>
 
-    <footer class="footer mt-auto py-2 bg-light">
-        <div class="container-fluid small text-muted">
-            <div class="row">
-                <div class="col me-auto">
-                    <span>Made with <i class="bi bi-heart"></i> in JS</span>
-                </div>
-                <div class="col-auto"></div>
-            </div>
-        </div>
-    </footer>
-
     <!-- Modal -->
     <div class="modal fade" id="modal-new-maze" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
         <div class="modal-dialog">
@@ -112,7 +101,7 @@
                     <div class="modal-body row">
                         <div class="col mb-3">
                             <label for="rows" class="form-label">Rows</label>
-                            <input type="number" class="form-control" id="rows" name="rows" min="10" max="300" step="1" value="10" required>
+                            <input type="number" class="form-control" id="rows" name="rows" min="10" max="300" step="1" value="10" autofocus required>
                         </div>
                         <div class="col mb-3">
                             <label for="columns" class="form-label">Columns</label>
@@ -120,7 +109,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-warning">Create</button>
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                     </div>
                 </form>

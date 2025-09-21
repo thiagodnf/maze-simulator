@@ -60,7 +60,7 @@ function resizeWindow() {
     const offsetLeft = rect.left + window.scrollX;
 
     canvas.width = window.innerWidth - 2 * offsetLeft;
-    canvas.height = window.innerHeight - offsetTop - 50;
+    canvas.height = window.innerHeight - offsetTop - 15;
 }
 
 formNewMaze.addEventListener('submit', function (e) {
@@ -100,6 +100,11 @@ function animate(ts) {
 
     CanvasUtils.update(context, maze);
 }
+
+modalNewMaze.addEventListener('shown.bs.modal', () => {
+    const el = modalNewMaze.querySelector('[autofocus]');
+    if (el) el.focus();
+});
 
 animate();
 
