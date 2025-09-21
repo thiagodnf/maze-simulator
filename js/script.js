@@ -5,8 +5,6 @@ import Maze from "./core/Maze.js";
 import Mouse from "./core/Mouse.js";
 import MazeUtils from "./utils/MazeUtils.js";
 
-const SIZE = 20;
-
 const btnStartStop = document.getElementById("btn-start-stop");
 const speeds = document.querySelectorAll("input[name=speed]");
 const modalNewMaze = document.getElementById("modal-new-maze");
@@ -107,4 +105,4 @@ resizeWindow();
 // disable right clicking
 canvas.addEventListener('contextmenu', e => e.preventDefault())
 
-// CanvasUtils.init(canvas);
+CanvasUtils.init(canvas);

@@ -13,7 +13,7 @@ export default class CanvasZoom {
     static offsetY = 0;
 
     // zoom amount
-    static scale = 10;
+    static scale = 1;
 
     // mouse functions
     static leftMouseDown = false;
@@ -96,6 +96,10 @@ export default class CanvasZoom {
 
             cb && cb();
         }
+    }
+
+    static size(size) {
+        return size * CanvasZoom.scale;
     }
 
     static toScreenX(xTrue) {
