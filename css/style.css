@@ -14,3 +14,12 @@ canvas {
 .menubar{
     border-bottom: 1px solid lightgray;
 }
+
+label{
+    font-weight: bold;
+}
+
+.bi-none{
+    background-color: transparent;
+    color: transparent;
+}

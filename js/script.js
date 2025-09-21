@@ -6,9 +6,11 @@ import Mouse from "./core/Mouse.js";
 import MazeUtils from "./utils/MazeUtils.js";
 
 const btnStartStop = document.getElementById("btn-start-stop");
+const btnShowHideToolbar = document.getElementById("show-hide-toolbar");
 const btnZoomActualSize = document.getElementById("zoom-actual-size");
 const btnZoomIn = document.getElementById("zoom-in");
 const btnZoomOut = document.getElementById("zoom-out");
+const toolbar = document.getElementById("toolbar");
 const speeds = document.querySelectorAll("input[name=speed]");
 const modalNewMaze = document.getElementById("modal-new-maze");
 const formNewMaze = document.getElementById("form-new-maze");
@@ -19,6 +21,8 @@ let running = false;
 let speed = 100;
 let last = 0;
 let maze = new Maze(MazeUtils.pattern1());
+
+let showToolbar = true;
 
 speeds.forEach(radio => {
     radio.addEventListener('change', function () {
@@ -36,6 +40,19 @@ btnStartStop.addEventListener('click', function () {
     } else {
         btnStartStop.innerHTML = '<i class="bi bi-play-circle me-3"></i>Play';
         btnStartStop.classList.replace("btn-secondary", "btn-primary")
+    }
+});
+
+btnShowHideToolbar.addEventListener('click', function () {
+
+    showToolbar = !showToolbar;
+
+    if (showToolbar) {
+        this.querySelector("span").textContent = "Hide Toolbar";
+        toolbar.classList.remove("d-none");
+    } else {
+        this.querySelector("span").textContent = "Show Toolbar";
+        toolbar.classList.add("d-none");
     }
 });
 
