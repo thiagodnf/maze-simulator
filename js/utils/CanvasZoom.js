@@ -57,7 +57,7 @@ export default class CanvasZoom {
             CanvasZoom.cursorX = event.pageX;
             CanvasZoom.cursorY = event.pageY;
 
-            if (CanvasZoom.rightMouseDown) {
+            if (CanvasZoom.leftMouseDown) {
                 // move the screen
                 CanvasZoom.offsetX += (CanvasZoom.cursorX - CanvasZoom.prevCursorX) / CanvasZoom.scale;
                 CanvasZoom.offsetY += (CanvasZoom.cursorY - CanvasZoom.prevCursorY) / CanvasZoom.scale;
@@ -124,5 +124,29 @@ export default class CanvasZoom {
 
     static trueWidth() {
         return CanvasZoom.canvas.clientWidth / CanvasZoom.scale;
+    }
+
+    static fillRect(ctx, x, y, width, height) {
+
+        x = CanvasZoom.toScreenX(x + 0.5);
+        y = CanvasZoom.toScreenY(y + 0.5);
+        width = CanvasZoom.size(width);
+        height = CanvasZoom.size(height);
+
+        ctx.fillRect(x, y, width, height);
+    }
+
+    static drawImage(ctx, image, x, y, width, height) {
+
+        if (!image) {
+            return;
+        }
+
+        x = CanvasZoom.toScreenX(x + 0.5);
+        y = CanvasZoom.toScreenY(y + 0.5);
+        width = CanvasZoom.size(width);
+        height = CanvasZoom.size(height);
+
+        ctx.drawImage(image, x, y, width, height);
     }
 }

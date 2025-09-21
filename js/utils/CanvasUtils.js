@@ -1,26 +1,32 @@
 import CanvasZoom from "./CanvasZoom.js";
+import direction from "../constants/Direction.js";
 
 const SIZE = 20;
 
 export default class CanvasUtils {
 
-    static sprite = new Image();
-
-    static mouseImage = document.getElementById("mouse-image");
-    static wallImage = document.getElementById("wall-image");
+    static mouseSprite = {}
+    static wallImage = null;
 
     static init(canvas) {
-        CanvasZoom.init(canvas);
-        sprite.src = 'images/mouse.png'; // sprite contains 4 frames horizontally
 
+        CanvasZoom.init(canvas);
+
+        CanvasUtils.mouseSprite = {
+            [direction.UP.angle]: CanvasUtils.loadImage('images/mouse-up.png'),
+            [direction.DOWN.angle]: CanvasUtils.loadImage('images/mouse-down.png'),
+            [direction.LEFT.angle]: CanvasUtils.loadImage('images/mouse-left.png'),
+            [direction.RIGHT.angle]: CanvasUtils.loadImage('images/mouse-right.png')
+        }
+
+        CanvasUtils.wallImage = CanvasUtils.loadImage('images/wall-3.png')
     }
 
-    static rotate(image) {
-        // rotate 90 degrees clockwise
-        image.style.transform = 'rotate(45deg)';
-        // optionally, rotate around its center
-        // image.style.transformOrigin = 'center center';
+    static loadImage(src) {
 
+        const image = new Image();
+
+        image.src = src;
 
         return image;
     }
@@ -34,8 +40,7 @@ export default class CanvasUtils {
         ctx.lineWidth = 1
         ctx.fillStyle = fillStyle;
 
-        ctx.fillRect(CanvasZoom.toScreenX(x + 0.5), CanvasZoom.toScreenY(y + 0.5), CanvasZoom.size(width), CanvasZoom.size(height));
-        // ctx.fill();
+        CanvasZoom.fillRect(ctx, x, y, width, height);
     }
 
     static drawSquare(ctx, x, y, size = 100, fillStyle = "") {
@@ -43,7 +48,7 @@ export default class CanvasUtils {
     }
 
     static drawImage(ctx, image, x, y, width, height) {
-        ctx.drawImage(image, CanvasZoom.toScreenX(x + 0.5), CanvasZoom.toScreenY(y + 0.5), CanvasZoom.size(width), CanvasZoom.size(height));
+        CanvasZoom.drawImage(ctx, image, x, y, width, height);
     }
 
     static drawMaze(ctx, maze) {
@@ -69,41 +74,10 @@ export default class CanvasUtils {
 
     static drawMouse(ctx, mouse) {
 
-        // let degrees = mouse.lookup.angle;
+        let angle = mouse.lookup.angle;
 
-        // let angle = -1.0 * degrees * Math.PI / 180;
+        const image = CanvasUtils.mouseSprite[angle];
 
-        // const x = mouse.j * SIZE + SIZE / 2;
-        // const y = mouse.i * SIZE + SIZE / 2;
-
-        // ctx.save();
-        // ctx.translate(x, y);
-        // ctx.rotate(angle);
-
-        // CanvasUtils.drawImage(ctx, CanvasUtils.mouseImage, -SIZE / 2, -SIZE / 2, SIZE, SIZE);
-
-        // // context.drawImage(CanvasUtils.mouseImage, -SIZE / 2, -SIZE / 2, SIZE, SIZE);
-        // ctx.restore();
-
-
-        // const image = CanvasUtils.rotate(this.mouseImage);
-
-        // CanvasUtils.drawImage(ctx, image, mouse.j * SIZE, mouse.i * SIZE, SIZE, SIZE);
-    }
-
-    static drawFrame(ctx, index, x = 0, y = 0, width, height) {
-
-        const frameWidth = sprite.width / totalFrames;
-        const frameHeight = sprite.height;
-
-        // ctx.clearRect(x, y, width || frameWidth, height || frameHeight);
-
-        ctx.drawImage(
-            sprite,
-            index * frameWidth, 0,           // source x, y
-            frameWidth, frameHeight,         // source width, height
-            x, y,                            // destination x, y
-            width || frameWidth, height || frameHeight // destination width, height
-        );
+        CanvasUtils.drawImage(ctx, image, mouse.j * SIZE, mouse.i * SIZE, SIZE, SIZE);
     }
 }
