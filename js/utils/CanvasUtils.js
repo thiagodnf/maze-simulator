@@ -91,4 +91,16 @@ export default class CanvasUtils {
 
         CanvasUtils.drawImage(ctx, image, mouse.j * SIZE, mouse.i * SIZE, SIZE, SIZE);
     }
+
+    static zoomActualSize(){
+        CanvasZoom.zoomActualSize();
+    }
+
+    static zoomIn() {
+        CanvasZoom.zoomIn();
+    }
+
+    static zoomOut() {
+        CanvasZoom.zoomOut();
+    }
 }

@@ -6,6 +6,9 @@ import Mouse from "./core/Mouse.js";
 import MazeUtils from "./utils/MazeUtils.js";
 
 const btnStartStop = document.getElementById("btn-start-stop");
+const btnZoomActualSize = document.getElementById("zoom-actual-size");
+const btnZoomIn = document.getElementById("zoom-in");
+const btnZoomOut = document.getElementById("zoom-out");
 const speeds = document.querySelectorAll("input[name=speed]");
 const modalNewMaze = document.getElementById("modal-new-maze");
 const formNewMaze = document.getElementById("form-new-maze");
@@ -35,6 +38,19 @@ btnStartStop.addEventListener('click', function () {
         btnStartStop.classList.replace("btn-secondary", "btn-primary")
     }
 });
+
+btnZoomActualSize.addEventListener('click', function () {
+    CanvasUtils.zoomActualSize();
+});
+
+btnZoomIn.addEventListener('click', function () {
+    CanvasUtils.zoomIn();
+});
+
+btnZoomOut.addEventListener('click', function () {
+    CanvasUtils.zoomOut();
+});
+
 
 function resizeWindow() {
 

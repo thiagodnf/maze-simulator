@@ -10,3 +10,7 @@ canvas {
 .navbar, .modal-header{
     background-color: #10505b;
 }
+
+.menubar{
+    border-bottom: 1px solid lightgray;
+}

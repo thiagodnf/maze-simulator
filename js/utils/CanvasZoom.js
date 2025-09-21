@@ -95,6 +95,8 @@ export default class CanvasZoom {
             CanvasZoom.offsetY -= unitsAddTop;
 
             cb && cb();
+
+            console.log(deltaY)
         }
     }
 
@@ -124,6 +126,28 @@ export default class CanvasZoom {
 
     static trueWidth() {
         return CanvasZoom.canvas.clientWidth / CanvasZoom.scale;
+    }
+
+    static zoomActualSize() {
+        CanvasZoom.scale = 1;
+        CanvasZoom.offsetX = 0;
+        CanvasZoom.offsetY = 0;
+    }
+
+    static zoomIn() {
+
+        const deltaY = -50;
+        const scaleAmount = -deltaY / 500;
+
+        CanvasZoom.scale = CanvasZoom.scale * (1 + scaleAmount);
+    }
+
+    static zoomOut() {
+
+        const deltaY = 50;
+        const scaleAmount = -deltaY / 500;
+
+        CanvasZoom.scale = CanvasZoom.scale * (1 + scaleAmount);
     }
 
     static fillRect(ctx, x, y, width, height) {
