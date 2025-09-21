@@ -51,6 +51,17 @@ export default class CanvasUtils {
         CanvasZoom.drawImage(ctx, image, x, y, width, height);
     }
 
+    static update(ctx, maze) {
+
+        CanvasUtils.clear(ctx);
+
+        CanvasUtils.drawMaze(ctx, maze)
+
+        for (const mouse of maze.mice) {
+            CanvasUtils.drawMouse(ctx, mouse);
+        }
+    }
+
     static drawMaze(ctx, maze) {
 
         let matrix = maze.pattern;

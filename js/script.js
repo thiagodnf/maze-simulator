@@ -66,17 +66,6 @@ formNewMaze.addEventListener('submit', function (e) {
 maze.addMouse(new Mouse(maze, new Random()));
 maze.addMouse(new Mouse(maze, new FollowWall()));
 
-function drawCanvas() {
-
-    CanvasUtils.clear(context);
-
-    CanvasUtils.drawMaze(context, maze)
-
-    for (const mouse of maze.mice) {
-        CanvasUtils.drawMouse(context, mouse);
-    }
-}
-
 function move() {
 
     if (running) {
@@ -93,7 +82,7 @@ function animate(ts) {
         last = ts;
     }
 
-    drawCanvas();
+    CanvasUtils.update(context, maze);
 }
 
 animate();
