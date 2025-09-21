@@ -95,8 +95,6 @@ export default class CanvasZoom {
             CanvasZoom.offsetY -= unitsAddTop;
 
             cb && cb();
-
-            console.log(deltaY)
         }
     }
 
