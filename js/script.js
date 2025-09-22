@@ -6,6 +6,7 @@ import Mouse from "./core/Mouse.js";
 import MazeUtils from "./utils/MazeUtils.js";
 
 const btnStartStop = document.getElementById("btn-start-stop");
+const btnShowHideVisitedCells = document.getElementById("show-hide-visited-cells");
 const btnShowHideToolbar = document.getElementById("show-hide-toolbar");
 const btnZoomActualSize = document.getElementById("zoom-actual-size");
 const btnZoomIn = document.getElementById("zoom-in");
@@ -36,10 +37,10 @@ btnStartStop.addEventListener('click', function () {
 
     if (running) {
         btnStartStop.innerHTML = '<i class="bi bi-stop-circle me-3"></i>Stop';
-        btnStartStop.classList.replace("btn-primary", "btn-secondary")
+        btnStartStop.classList.replace("btn-warning", "btn-secondary")
     } else {
         btnStartStop.innerHTML = '<i class="bi bi-play-circle me-3"></i>Play';
-        btnStartStop.classList.replace("btn-secondary", "btn-primary")
+        btnStartStop.classList.replace("btn-secondary", "btn-warning")
     }
 });
 
@@ -53,6 +54,17 @@ btnShowHideToolbar.addEventListener('click', function () {
     } else {
         this.querySelector("span").textContent = "Show Toolbar";
         toolbar.classList.add("d-none");
+    }
+});
+
+btnShowHideVisitedCells.addEventListener('click', function () {
+
+    maze.showVisited = !maze.showVisited;
+
+    if (maze.showVisited) {
+        this.innerHTML = '<i class="bi bi-eye-slash me-3"></i>Hide Visited Cells';
+    } else {
+        this.innerHTML = '<i class="bi bi-eye me-3"></i>Show Visited Cells';
     }
 });
 

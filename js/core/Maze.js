@@ -3,6 +3,8 @@ export default class Maze {
     constructor(pattern) {
         this.mice = [];
         this.pattern = pattern;
+        this.visited = new Set();
+        this.showVisited = false;
     }
 
     addMouse(mouse) {
@@ -16,7 +18,14 @@ export default class Maze {
     nextMove() {
 
         for (const mouse of this.mice) {
+
             mouse.nextMove(this);
+
+            this.visited.add(`${mouse.i}_${mouse.j}`)
         }
+    }
+
+    isVisited(i, j) {
+        return this.visited.has(`${i}_${j}`)
     }
 }

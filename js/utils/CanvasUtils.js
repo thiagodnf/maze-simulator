@@ -70,6 +70,10 @@ export default class CanvasUtils {
 
             for (let j = 0; j < matrix[i].length; j++) {
 
+                if (maze.showVisited && maze.isVisited(i, j)) {
+                    CanvasUtils.drawSquare(ctx, j * SIZE, i * SIZE, SIZE, "pink")
+                }
+
                 if (matrix[i][j] === 0) {
 
                 } else if (matrix[i][j] === 1) {
@@ -92,7 +96,7 @@ export default class CanvasUtils {
         CanvasUtils.drawImage(ctx, image, mouse.j * SIZE, mouse.i * SIZE, SIZE, SIZE);
     }
 
-    static zoomActualSize(){
+    static zoomActualSize() {
         CanvasZoom.zoomActualSize();
     }
 
