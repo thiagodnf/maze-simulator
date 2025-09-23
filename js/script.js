@@ -4,6 +4,7 @@ import FollowWall from "./strategies/FollowWall.js";
 import Maze from "./core/Maze.js";
 import Mouse from "./core/Mouse.js";
 import MazeUtils from "./utils/MazeUtils.js";
+import Settings from "./core/Settings.js";
 
 const btnStartStop = document.getElementById("btn-start-stop");
 const btnShowHideVisitedCells = document.getElementById("show-hide-visited-cells");
@@ -23,18 +24,13 @@ let speed = 100;
 let last = 0;
 let maze = new Maze(MazeUtils.pattern1());
 
-let showToolbar = true;
-
 speeds.forEach(radio => {
     radio.addEventListener('change', function () {
         speed = parseInt(this.value);
     });
 });
 
-btnStartStop.addEventListener('click', function () {
-
-    running = !running;
-
+function renderStartStopButton() {
     if (running) {
         btnStartStop.innerHTML = '<i class="bi bi-stop-circle me-3"></i>Stop';
         btnStartStop.classList.replace("btn-warning", "btn-secondary")
@@ -42,13 +38,20 @@ btnStartStop.addEventListener('click', function () {
         btnStartStop.innerHTML = '<i class="bi bi-play-circle me-3"></i>Play';
         btnStartStop.classList.replace("btn-secondary", "btn-warning")
     }
+}
+
+btnStartStop.addEventListener('click', function () {
+
+    running = !running;
+
+    renderStartStopButton();
 });
 
 btnShowHideToolbar.addEventListener('click', function () {
 
-    showToolbar = !showToolbar;
+    Settings.showToolbar = !Settings.showToolbar;
 
-    if (showToolbar) {
+    if (Settings.showToolbar) {
         this.querySelector("span").textContent = "Hide Toolbar";
         toolbar.classList.remove("d-none");
     } else {
@@ -59,9 +62,9 @@ btnShowHideToolbar.addEventListener('click', function () {
 
 btnShowHideVisitedCells.addEventListener('click', function () {
 
-    maze.showVisited = !maze.showVisited;
+    Settings.showVisibleCells = !Settings.showVisibleCells;
 
-    if (maze.showVisited) {
+    if (Settings.showVisibleCells) {
         this.innerHTML = '<i class="bi bi-eye-slash me-3"></i>Hide Visited Cells';
     } else {
         this.innerHTML = '<i class="bi bi-eye me-3"></i>Show Visited Cells';
@@ -102,10 +105,12 @@ formNewMaze.addEventListener('submit', function (e) {
     const cols = parseInt(formData.get('columns'), 10);
 
     maze = new Maze(MazeUtils.generate(rows, cols));
+
     maze.addMouse(new Mouse(maze, new Random()));
     maze.addMouse(new Mouse(maze, new FollowWall()));
 
     running = false;
+    renderStartStopButton();
 
     bootstrap.Modal.getInstance(modalNewMaze).hide();
 });
@@ -147,3 +152,5 @@ resizeWindow();
 canvas.addEventListener('contextmenu', e => e.preventDefault())
 
 CanvasUtils.init(canvas);
+
+

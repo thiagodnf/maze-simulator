@@ -1,5 +1,6 @@
 import CanvasZoom from "./CanvasZoom.js";
 import direction from "../constants/Direction.js";
+import Settings from "../core/Settings.js";
 
 const SIZE = 20;
 
@@ -70,7 +71,7 @@ export default class CanvasUtils {
 
             for (let j = 0; j < matrix[i].length; j++) {
 
-                if (maze.showVisited && maze.isVisited(i, j)) {
+                if (Settings.showVisibleCells && maze.isVisited(i, j)) {
                     CanvasUtils.drawSquare(ctx, j * SIZE, i * SIZE, SIZE, "pink")
                 }
 

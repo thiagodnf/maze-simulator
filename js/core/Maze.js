@@ -4,7 +4,6 @@ export default class Maze {
         this.mice = [];
         this.pattern = pattern;
         this.visited = new Set();
-        this.showVisited = false;
     }
 
     addMouse(mouse) {
