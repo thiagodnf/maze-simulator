@@ -105,6 +105,8 @@ formNewMaze.addEventListener('submit', function (e) {
     maze.addMouse(new Mouse(maze, new Random()));
     maze.addMouse(new Mouse(maze, new FollowWall()));
 
+    running = false;
+
     bootstrap.Modal.getInstance(modalNewMaze).hide();
 });
 

@@ -31,7 +31,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link" href="#" id="menubar-file" data-bs-toggle="dropdown">File</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item small" href="#" data-bs-toggle="modal" data-bs-target="#modal-new-maze"><i class="bi bi-plus me-3"></i><span>New Maze</span></a></li>
+                            <li><a class="dropdown-item small" href="#" data-bs-toggle="modal" data-bs-target="#modal-new-maze"><i class="bi bi-plus-circle me-3"></i><span>New Maze</span></a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -40,11 +40,15 @@
 
                             <li><a class="dropdown-item small" href="#" id="show-hide-visited-cells"><i class="bi bi-eye me-3"></i><span>Show Visited Cells</span></a></li>
 
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
 
                             <li><a class="dropdown-item small" href="#" id="show-hide-toolbar"><i class="bi bi-square me-3 bi-none"></i><span>Hide Toolbar</span></a></li>
 
-                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <li><a class="dropdown-item small" href="#" id="zoom-actual-size"><i class="bi bi-search me-3"></i><span>Actual Size</span></a></li>
                             <li><a class="dropdown-item small" href="#" id="zoom-in"><i class="bi bi-zoom-in me-3"></i><span>Zoom In</span></a></li>
                             <li><a class="dropdown-item small" href="#" id="zoom-out"><i class="bi bi-zoom-out me-3"></i><span>Zoom Out</span></a></li>
@@ -102,13 +106,17 @@
                     </div>
                     <div class="modal-body row">
                         <div class="col mb-3">
-                            <label for="rows" class="form-label">Rows</label>
-                            <input type="number" class="form-control" id="rows" name="rows" min="10" max="300" step="1" value="10" pattern="[0-9]*" autocomplete="off" autocorrect="off" autofocus required>
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="rows" name="rows" min="10" max="300" step="1" value="10" pattern="[0-9]*" autocomplete="off" autocorrect="off" autofocus required>
+                                <label for="rows">Rows</label>
+                            </div>
                             <div class="form-text">Must between 10 and 300</div>
                         </div>
                         <div class="col mb-3">
-                            <label for="columns" class="form-label">Columns</label>
-                            <input type="number" class="form-control" id="columns" name="columns" min="10" max="300" step="1" value="10" pattern="[0-9]*" autocomplete="off" autocorrect="off" required>
+                            <div class="form-floating">
+                                <input type="number" class="form-control" id="columns" name="columns" min="10" max="300" step="1" value="10" pattern="[0-9]*" autocomplete="off" autocorrect="off" required>
+                                <label for="columns">Columns</label>
+                            </div>
                             <div class="form-text">Must between 10 and 300</div>
                         </div>
                     </div>
